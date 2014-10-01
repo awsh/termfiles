@@ -4,12 +4,13 @@ import config
 import tornado.web
 import tempfile
 import os
+import hashlib
 
 @tornado.web.stream_request_body
 class UploadFile(Base):
         
     def put(self, filename):
-        self.write('\nhttp://localhost:8000/' + filename + '\n\n')
+        self.write('\n' + self.hash.hexdigest() + '\nhttp://localhost:8000/' + filename + '\n\n')
         self.finish()
         self.temp_file.seek(0)
         with open(os.path.join(config.UPLOAD_DIR, self.filename), 'wb') as file:
@@ -20,6 +21,7 @@ class UploadFile(Base):
         self.filename = self.request.uri.strip('/')
         self.temp_file = tempfile.NamedTemporaryFile()
         self.received = 0
+        self.hash = hashlib.md5()
 
     def data_received(self, chunk):
         self.received += len(chunk)
@@ -27,6 +29,7 @@ class UploadFile(Base):
             self.write_error(413)
             self.finish()
         else:
+            self.hash.update(chunk)
             self.temp_file.write(chunk)
 
     def write_error(self, status_code, **kwargs):
