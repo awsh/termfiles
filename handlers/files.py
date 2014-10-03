@@ -1,24 +1,33 @@
-
 from handlers.base import Base
 import config
 import tornado.web
 import tempfile
 import os
 import hashlib
+import string
+import random
 
 @tornado.web.stream_request_body
 class UploadFile(Base):
-        
+
     def put(self, filename):
-        self.write('\n' + self.hash.hexdigest() + '\nhttp://localhost:8000/' + filename + '\n\n')
+        rand = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+        print(rand)
+        self.write('\n{0}\n{1}/{2}/{3}\n\n'.format(self.hash.hexdigest(),
+                                                   config.URL,
+                                                   rand,
+                                                   filename))
         self.finish()
+        
+        if not os.path.exists(os.path.join(config.UPLOAD_DIR, rand)):
+            os.makedirs(os.path.join(config.UPLOAD_DIR, rand))
+
         self.temp_file.seek(0)
-        with open(os.path.join(config.UPLOAD_DIR, self.filename), 'wb') as file:
+        with open(os.path.join(os.path.join(config.UPLOAD_DIR, rand), filename), 'wb') as file:
             file.write(self.temp_file.read())
         self.temp_file.close()
 
     def prepare(self):
-        self.filename = self.request.uri.strip('/')
         self.temp_file = tempfile.NamedTemporaryFile()
         self.received = 0
         self.hash = hashlib.md5()
@@ -36,6 +45,6 @@ class UploadFile(Base):
         self.set_status(status_code)
         self.write('Upload too large')
 
-class GetFile(Base):
-    def get(self, hash, filename):
-        pass
+
+
+ 
