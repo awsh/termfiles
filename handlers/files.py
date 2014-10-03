@@ -12,8 +12,8 @@ class UploadFile(Base):
 
     def put(self, filename):
         rand = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
-        print(rand)
-        self.write('\n{0}\n{1}/{2}/{3}\n\n'.format(self.hash.hexdigest(),
+        
+        self.write('\nmd5sum: {0}\n{1}/{2}/{3}\n\n'.format(self.hash.hexdigest(),
                                                    config.URL,
                                                    rand,
                                                    filename))
