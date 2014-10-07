@@ -6,6 +6,8 @@ import os
 import hashlib
 import string
 import random
+import zipfile
+import tarfile
 
 @tornado.web.stream_request_body
 class UploadFile(Base):
@@ -46,5 +48,36 @@ class UploadFile(Base):
         self.write('Upload too large')
 
 
+class Archive(Base):
+    def get(self, files, filename, ext):
+        ext = ext.lower()
+        rand = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
 
- 
+        if not os.path.exists(os.path.join(config.UPLOAD_DIR, rand)):
+            os.makedirs(os.path.join(config.UPLOAD_DIR, rand))
+    
+        full_filename = "{0}.{1}".format(filename, ext)
+        file_out = os.path.join(config.UPLOAD_DIR,
+                                os.path.join(rand, full_filename))
+
+        if ext == "zip": 
+            with zipfile.ZipFile(file_out, 'w') as f:
+                for file in files.split('+'):
+                    f.write(os.path.join(config.UPLOAD_DIR, file), file.split('/')[1])
+        elif ext == "tar":
+            with tarfile.open(file_out, 'w') as f:
+                for file in files.split('+'):
+                    f.add(os.path.join(config.UPLOAD_DIR, file), file.split('/')[1])
+        elif ext == "tar.gz":
+            with tarfile.open(file_out, 'w:gz') as f:
+                for file in files.split('+'):
+                    f.add(os.path.join(config.UPLOAD_DIR, file), file.split('/')[1])
+        elif ext == "tar.bz2":
+            with tarfile.open(file_out, 'w:bz2') as f:
+                for file in files.split('+'):
+                    f.add(os.path.join(config.UPLOAD_DIR, file), file.split('/')[1])
+        else:
+            self.write("\nUnsupported archive type.\n\n")
+            return
+        self.redirect("{0}/{1}/{2}.{3}".format(config.URL, rand, filename, ext))
+        
