@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ static_url('css/style.css') }}" title="style">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>termfiles.com - file sharing from your terminal</title>
+</head>
+
+<body>
+
+
+<pre>
+<span class="headline">termfiles(1)                          User Commands                         termfiles(1)</span>
+</pre>
+
+<h2>NAME</h2>
+<pre>       termfiles - share files from your terminal</pre>
+
+<h2>SYNOPSIS</h2>
+<pre>       <b>curl --upload-file <span class="args">[FILE]</span> http://termfiles.com/<span class="args">[FILE]</span></b></pre>
+
+<h2>DESCRIPTION</h2>
+<pre>       Share FILE(s) from your terminal using any application that supports HTTP PUT.</pre>
+
+<h2>EXAMPLES</h2>
+<pre>       Upload a file:
+            <b>curl --upload-file <span class="args">[FILE]</span> http://termfiles.com/<span class="args">[FILE]</span></b>
+            
+       Retrieve a file:
+            <b>wget http://termfiles.com/ABCDEFGH/<span class="args">[FILE]</span></b>
+
+       Retrieve multiple files as an archive:
+            <b>wget http://termfiles.com/ABCDEFGH/<span class="args">[FILE]</span><span class="plus">+</span>ZYXWVUTS/<span class="args">[FILE]</span><span class="plus">=</span><span class="args">[ARCHIVE]</span></b>
+       Supported archive types are zip, tar, tar.gz, tar.bz2            
+</pre>
+
+<h2>BUGS</h2>
+<pre>       Please report any issues at <a href="https://github.com/awsh/termfiles/issues">https://github.com/awsh/termfiles/issues</a> </pre>
+
+<h2>SEE ALSO</h2>
+<pre>       <a href="https://transfer.sh">https://transfer.sh</a> - command line and web file sharing
+<br>
+<span class="footline">termfiles(1)                          October 2014                          termfiles(1)</span>
+</pre>
+
+
+</body></html>

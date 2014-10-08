@@ -3,41 +3,42 @@ from handlers.base import Base
   
 class Index(Base):
     def get(self):
-        contents = """
+        if "Mozilla" in self.request.headers['User-Agent']:
+            self.render("index.html")
+        else:
+            self.write("""
        
         termfiles(1)                    User Manuals                    termfiles(1)
 
+
         NAME
-            termfiles.com - terminal based file sharing
+            termfiles.com - share files from your terminal
 
         SYNOPSIS
-            curl --upload-file [filename] http://termfiles.com/[filename]
+            curl --upload-file [FILE] http://termfiles.com/[FILE]
 
         DESCRIPTION
-            Share files directly from your terminal using any application that supports HTTP PUT
+            Share FILE(s) from your terminal using any application that supports HTTP PUT.
 
         EXAMPLES
-            To upload a file:
-
-                curl --upload-file test.txt http://termfiles.com/test.txt
+            Upload a file:
+                curl --upload-file [FILE] http://termfiles.com/[FILE]
+            
+            Retrieve a file:
+                wget http://termfiles.com/ABCDEFGH/[FILE]
 
             
-            To retrieve a file:
-
-                wget http://termfiles.com/ABCDEFGH/test.txt
-
-            
-            To retrieve multiple files as an archive:
-
-                wget http://termfiles.com/ABCDEFGH/test1.txt+ZYXWVUTS/test2.txt=myfile.zip
-            
+            Retrieve multiple files as an archive:
+                wget http://termfiles.com/ABCDEFGH/[FILE]+ZYXWVUTS/[FILE]=[ARCHIVE]
             Supported archive types are zip, tar, tar.gz, tar.bz2
         
-
         BUGS
             Please report any issues at https://github.com/awsh/termfiles/issues
 
         SEE ALSO
-            http://transfer.sh\n\r\n""" 
+            http://transfer.sh - command line and web file sharing
+            
+        
 
-        self.write(contents)
+        termfiles(1)                    October 2014                    termfiles(1)\n\r\n""") 
+ 

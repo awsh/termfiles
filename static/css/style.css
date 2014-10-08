@@ -1,0 +1,220 @@
+
+/*
+General colour scheme:
+#333 Grey for copy text
+
+Links: #336699;
+Links visited state: #4488bb;
+Other Link states: #07488A;
+
+#666 text grey
+#ddd grey
+#BBCCD9 blue grey
+#4488bb lighter blue
+#336699 dk blue
+*/
+
+/*
+that space that you wanted to get rid of is actually space further up here;
+    html, body {
+        margin: 0;
+        padding: 0;
+    }
+*/
+
+
+b { color:#660066; } /*#502000; }*/
+i { color:#006000; }
+
+/* General Styles */
+html, body {    
+    background-color: #fcfcfc;
+    font-family: sans-serif;
+    font-size: 100%;
+    color: #181818;
+}
+
+body {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+h1, h2, h3, h4, h5, h5 {
+    font-family: helvetica, sans-serif;
+    font-weight: normal;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: #008000;
+    margin-top: 25px;
+}
+
+h1 {
+/*
+    font-size: 18px;
+*/
+}
+
+h2 {
+    color: #000052;/*#A00000;*/
+    padding-top: 15px;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+h3 {
+    color: #600000;
+    font-size: 100%;
+    font-style: italic;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+p {
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 0.5em;
+}
+
+
+pre {
+    margin-left: 8px;
+    font-family: monospace, courier; 
+}
+
+li {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+ul.list-wide {
+}
+
+ul.list-wide li {
+    margin-bottom: 12px;
+}
+
+a {
+    color: #1030ff;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #4080dd;
+}
+
+a:hover, a:focus, a:active {
+    color: red;
+    background-color: #ffe0e0;
+    text-decoration: underline;
+}
+
+/* Preamble */
+
+
+/* End of Interfaces */
+
+a.func {
+    color: red;
+    text-decoration: none;
+}
+a.manpage {
+    color: red;
+    text-decoration: none;
+}
+a.file {
+    color: red;
+    text-decoration: none;
+}
+
+div.lmargin {
+    margin-left: 8px;
+}
+
+pre.code {
+    background-color: #f4f0f4;
+//    font-family: monospace, courier;
+    font-size: 110%;
+    margin-left: 0px;
+    margin-right: 60px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 1px solid #AADDAA;
+}
+
+p.indented {
+    margin-left: 100px;
+}
+
+
+
+strong, span.hl {
+    font-weight: bold;
+    color: #303030;
+}
+
+
+span.headline, span.footline {
+    font-weight: bold;
+}
+
+.cmd {
+    font-family: monospace;
+    color: darkgreen;
+}
+
+.code {
+    color: darkgreen;
+}
+
+.const {
+    font-family: monospace;
+    color: #330000;
+}
+
+.email {
+    font-family: monospace;
+    color: #000080;
+}
+
+.envvar {
+    font-family: monospace;
+    color: #330000;
+}
+
+.func {
+    font-family: serif;
+    font-style: italic;
+    color: #330000;
+}
+
+.args {
+    font-family: monospace;
+    font-size: 130%;
+    color: #006000;
+}
+.plus {
+    font-family: monospace;
+    font-size: 130%;
+    color: #0099FF;
+}
+
+.pathname {
+    font-family: monospace;
+    color: darkgreen;
+}
+
+.url {
+    font-family: serif;
+    font-style: italic;
+    color: #440064;
+}
+
+.var {
+    font-family: serif;
+    font-style: italic;
+    color: #330000;
+}
+
