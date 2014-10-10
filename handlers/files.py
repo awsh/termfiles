@@ -13,19 +13,19 @@ import tarfile
 class UploadFile(Base):
 
     def put(self, filename):
-        rand = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+        url = ''.join(random.choice(string.digits) for _ in range(8))
         
         self.write('\nmd5sum: {0}\n{1}/{2}/{3}\n\n'.format(self.hash.hexdigest(),
                                                    config.URL,
-                                                   rand,
+                                                   url,
                                                    filename))
         self.finish()
         
-        if not os.path.exists(os.path.join(config.UPLOAD_DIR, rand)):
-            os.makedirs(os.path.join(config.UPLOAD_DIR, rand))
+        if not os.path.exists(os.path.join(config.UPLOAD_DIR, url)):
+            os.makedirs(os.path.join(config.UPLOAD_DIR, url))
 
         self.temp_file.seek(0)
-        with open(os.path.join(os.path.join(config.UPLOAD_DIR, rand), filename), 'wb') as file:
+        with open(os.path.join(os.path.join(config.UPLOAD_DIR, url), filename), 'wb') as file:
             file.write(self.temp_file.read())
         self.temp_file.close()
 
@@ -51,14 +51,13 @@ class UploadFile(Base):
 class Archive(Base):
     def get(self, files, filename, ext):
         ext = ext.lower()
-        rand = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
-
-        if not os.path.exists(os.path.join(config.UPLOAD_DIR, rand)):
-            os.makedirs(os.path.join(config.UPLOAD_DIR, rand))
+        url = ''.join(random.choice(string.digits) for _ in range(8))
+        if not os.path.exists(os.path.join(config.UPLOAD_DIR, url)):
+            os.makedirs(os.path.join(config.UPLOAD_DIR, url))
     
         full_filename = "{0}.{1}".format(filename, ext)
         file_out = os.path.join(config.UPLOAD_DIR,
-                                os.path.join(rand, full_filename))
+                                os.path.join(url, full_filename))
 
         if ext == "zip": 
             with zipfile.ZipFile(file_out, 'w') as f:
@@ -79,5 +78,5 @@ class Archive(Base):
         else:
             self.write("\nUnsupported archive type.\n\n")
             return
-        self.redirect("{0}/{1}/{2}.{3}".format(config.URL, rand, filename, ext))
+        self.redirect("{0}/{1}/{2}.{3}".format(config.URL, url, filename, ext))
         
