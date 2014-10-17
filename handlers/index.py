@@ -3,6 +3,10 @@ from handlers.base import Base
   
 class Index(Base):
     def get(self):
+        '''
+        Returns html template if "Mozilla" is in the user agent
+        or plain text if not
+        '''
         if "Mozilla" in self.request.headers['User-Agent']:
             self.render("index.html")
         else:
@@ -25,11 +29,11 @@ class Index(Base):
                 curl --upload-file [FILE] http://termfiles.com/[FILE]
             
             Retrieve a file:
-                wget http://termfiles.com/ABCDEFGH/[FILE]
+                wget http://termfiles.com/12345678/[FILE]
 
             
             Retrieve multiple files as an archive:
-                wget http://termfiles.com/ABCDEFGH/[FILE]+ZYXWVUTS/[FILE]=[ARCHIVE]
+                wget http://termfiles.com/12345678/[FILE]+87654321/[FILE]=[ARCHIVE]
             Supported archive types are zip, tar, tar.gz, tar.bz2
         
         BUGS

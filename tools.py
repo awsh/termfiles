@@ -5,6 +5,16 @@ import errno
 import colorama
 
 def expire_files():
+    '''
+    FILE CLEANUP ROUTINE
+    
+    This function will run on a schedule set by FILE_CLEANUP SCHEDULE
+    in config.py. 
+    
+    Running this function will delete all files that have expired as
+    determined by EXPIRE_TIME in config.py
+    '''
+
     colorama.init()
     green = colorama.Fore.GREEN
     yellow = colorama.Fore.YELLOW

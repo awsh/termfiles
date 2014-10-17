@@ -11,7 +11,10 @@ import tarfile
 
 @tornado.web.stream_request_body
 class UploadFile(Base):
-
+    '''
+    Streams input from http put request to a tempfile and writes 
+    out to config.UPLOAD_DIR
+    '''
     def put(self, filename):
         url = ''.join(random.choice(string.digits) for _ in range(8))
         
@@ -49,6 +52,10 @@ class UploadFile(Base):
 
 
 class Archive(Base):
+    '''
+    Generates an archive of files and 
+    redirects user to download link
+    '''
     def get(self, files, filename, ext):
         ext = ext.lower()
         url = ''.join(random.choice(string.digits) for _ in range(8))
