@@ -34,4 +34,4 @@ EXPIRE_TIME = 24
 # FILE_CLEANUP_SCHEDULE is the number of milliseconds between file
 # cleanup operations. By default the file cleanup routine will run 
 # once every 86400000 milliseconds which is 1 day. 
-FILE_CLEANUP_SCHEDULE = 2000
+FILE_CLEANUP_SCHEDULE = 86400000
