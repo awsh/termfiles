@@ -1,4 +1,5 @@
 #File hosting for terminal uploads
+This code currently powers termfiles.com
 
 ##Upload a file:
 `curl --upload-file filename.ext http://localhost:8000/filename.ext`
